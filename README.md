@@ -1,1 +1,0 @@
-# paddison-dental
