@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Book a Free Consultation — Paddison Dental Group</title>
+
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+<link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&f[]=editorial-new@400,500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --orange:        #FD6D06;
+  --orange-light:  #FF852E;
+  --gray-900: #241607;
+  --neutral-900: #0F0F0F;
+  --body:     #363435;
+  --gray-700: #7E7E7E;
+  --gray-600: #515151;
+  --gray-500: #8B8B8B;
+  --gray-100: #F5F5F5;
+  --gray-50:  #FAF9F9;
+  --white:    #FFFFFF;
+  --logo-brown: #7D6161;
+
+  --frame: 1440px;
+  --content: 1280px;
+  --pad-x: 80px;
+
+  --font-display: 'General Sans', system-ui, sans-serif;
+  --font-body: 'IBM Plex Sans', system-ui, sans-serif;
+  --font-editorial: 'Editorial New', 'PP Editorial New', Georgia, serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--body);
+  background: var(--white);
+  -webkit-font-smoothing: antialiased;
+}
+img { display: block; max-width: 100%; }
+button { font: inherit; cursor: pointer; border: 0; background: transparent; }
+a { color: inherit; text-decoration: none; }
+h1, h2, h3, h4, p { margin: 0; }
+
+@media (max-width: 768px) { :root { --pad-x: 24px; } }
+
+/* ==== HEADER (matches main site) ==== */
+.utility-bar {
+  background: var(--orange);
+  color: var(--white);
+  font-family: var(--font-body);
+  font-size: 14px;
+  box-shadow: 0 3px 25px rgba(0,0,0,0.15);
+  position: relative;
+  z-index: 20;
+}
+.utility-bar .container {
+  max-width: var(--content);
+  margin: 0 auto;
+  padding: 0 var(--pad-x);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 38px;
+  gap: 24px;
+}
+.utility-bar .info-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.utility-bar .info-group svg { width: 14px; height: 14px; fill: var(--white); }
+@media (max-width: 768px) {
+  .utility-bar .container { font-size: 12px; height: auto; padding-top: 8px; padding-bottom: 8px; flex-wrap: wrap; }
+}
+
+.site-header { background: var(--white); position: sticky; top: 0; z-index: 30; }
+.site-header .inner {
+  display: flex; align-items: center; justify-content: space-between;
+  height: 85px; padding: 8px var(--pad-x);
+  max-width: var(--frame); margin: 0 auto;
+}
+.logo { display: flex; align-items: center; gap: 10px; }
+.logo::before {
+  content: ""; display: block;
+  width: 140px; height: 64px;
+  background-image: url("assets/logo.svg");
+  background-size: contain; background-position: left center;
+  background-repeat: no-repeat;
+}
+.main-nav ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 32px; }
+.main-nav a {
+  font-family: var(--font-body); font-weight: 400; font-size: 17px;
+  color: var(--gray-500);
+}
+.main-nav a:hover { color: var(--gray-900); }
+.header-right { display: flex; align-items: center; gap: 18px; }
+
+/* Two-phone group — desktop view */
+.phone-group { display: flex; align-items: center; gap: 24px; }
+.phone-link {
+  display: flex; align-items: center; gap: 8px;
+  font-family: var(--font-body); font-weight: 700; font-size: 19px;
+  color: var(--orange);
+}
+.phone-link--multi {
+  flex-direction: column; align-items: flex-start; gap: 1px;
+  line-height: 1.1; text-decoration: none;
+}
+.phone-link--multi .loc-label {
+  font-family: var(--font-body); font-weight: 500; font-size: 11px;
+  text-transform: uppercase; letter-spacing: 0.06em;
+  color: var(--gray-600);
+}
+.phone-link--multi .num {
+  font-family: var(--font-body); font-weight: 700; font-size: 16px;
+  color: var(--orange); white-space: nowrap;
+}
+.phone-link--multi:hover .num { color: #E45F00; }
+.phone-link svg { width: 16px; height: 16px; fill: var(--orange); }
+
+/* Mobile-only trigger button */
+.phone-mobile-trigger {
+  display: none;
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: var(--orange); color: var(--white);
+  align-items: center; justify-content: center;
+  cursor: pointer; border: 0;
+  transition: background-color .15s ease, transform .15s ease;
+}
+.phone-mobile-trigger:hover { background: #E45F00; }
+.phone-mobile-trigger:active { transform: scale(0.96); }
+.phone-mobile-trigger svg { width: 18px; height: 18px; fill: var(--white); }
+
+/* Picker dropdown */
+.phone-picker {
+  position: absolute; top: 100%; right: var(--pad-x);
+  margin-top: 8px;
+  background: var(--white);
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+  overflow: hidden;
+  z-index: 40;
+  opacity: 0; transform: translateY(-6px);
+  pointer-events: none;
+  transition: opacity .15s ease, transform .15s ease;
+  min-width: 220px;
+}
+.phone-picker.is-open {
+  opacity: 1; transform: translateY(0);
+  pointer-events: auto;
+}
+.phone-picker__item {
+  display: flex; flex-direction: column;
+  padding: 14px 18px;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  text-decoration: none;
+  transition: background .15s ease;
+}
+.phone-picker__item:last-child { border-bottom: 0; }
+.phone-picker__item:hover { background: var(--gray-100); }
+.phone-picker__item .loc-label {
+  font-family: var(--font-body); font-weight: 500; font-size: 12px;
+  text-transform: uppercase; letter-spacing: 0.06em;
+  color: var(--gray-600); margin-bottom: 2px;
+}
+.phone-picker__item .num {
+  font-family: var(--font-body); font-weight: 700; font-size: 18px;
+  color: var(--orange);
+}
+
+@media (max-width: 1024px) {
+  .main-nav, .phone-group { display: none; }
+  .phone-mobile-trigger { display: inline-flex; }
+}
+
+/* ==== PAGE HERO ==== */
+.page-hero {
+  background: linear-gradient(180deg, #FFF8F2 0%, #FFEEDC 100%);
+  padding: 80px 0 60px;
+  position: relative;
+  overflow: hidden;
+}
+.page-hero::before {
+  content: "";
+  position: absolute;
+  top: -100px; right: -100px;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(253,109,6,0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+.page-hero .inner {
+  max-width: 840px;
+  margin: 0 auto;
+  padding: 0 var(--pad-x);
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+.page-hero .eyebrow {
+  display: inline-flex; align-items: center; gap: 12px;
+  font-family: var(--font-body); font-weight: 500; font-size: 16px;
+  text-transform: uppercase; letter-spacing: 0.02em;
+  color: var(--gray-700);
+  margin-bottom: 17px;
+}
+.page-hero .eyebrow::before {
+  content: ""; width: 16px; height: 16px;
+  background-color: currentColor;
+  -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 2l2.39 7.36H22l-6.18 4.49L18.21 21 12 16.5 5.79 21l2.39-7.15L2 9.36h7.61z'/></svg>") center / contain no-repeat;
+          mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 2l2.39 7.36H22l-6.18 4.49L18.21 21 12 16.5 5.79 21l2.39-7.15L2 9.36h7.61z'/></svg>") center / contain no-repeat;
+}
+.page-hero h1 {
+  font-family: var(--font-display);
+  font-weight: 500; font-size: 54px;
+  line-height: 1.15;
+  letter-spacing: -1.16px;
+  color: var(--gray-900);
+  margin-bottom: 20px;
+}
+.page-hero h1 .accent {
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--orange);
+}
+.page-hero p {
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--gray-600);
+  max-width: 580px;
+  margin: 0 auto;
+}
+@media (max-width: 768px) {
+  .page-hero h1 { font-size: 38px; letter-spacing: -0.6px; }
+}
+
+/* ==== BOOKING LAYOUT ==== */
+.booking-section {
+  background: var(--white);
+  padding: 60px 0 100px;
+}
+.booking-section .inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 var(--pad-x);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+  gap: 60px;
+  align-items: start;
+}
+
+/* Left column: reassurance + what to expect */
+.book-side h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 22px;
+  letter-spacing: -0.3px;
+  color: var(--gray-900);
+  margin-bottom: 16px;
+}
+.book-side ol {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 32px;
+  counter-reset: step;
+}
+.book-side ol li {
+  position: relative;
+  padding: 0 0 24px 48px;
+  counter-increment: step;
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--gray-900);
+}
+.book-side ol li::before {
+  content: counter(step);
+  position: absolute;
+  left: 0; top: 0;
+  width: 32px; height: 32px;
+  background: var(--orange);
+  color: var(--white);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 15px;
+}
+.book-side ol li strong {
+  display: block;
+  font-weight: 600;
+  font-size: 17px;
+  margin-bottom: 4px;
+  color: var(--gray-900);
+}
+.book-side ol li span {
+  color: var(--gray-600);
+  font-size: 15px;
+}
+.book-side .reassure-card {
+  background: var(--gray-100);
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 16px;
+}
+.book-side .reassure-card .label {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--gray-700);
+  margin-bottom: 8px;
+}
+.book-side .reassure-card .value {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 18px;
+  color: var(--gray-900);
+  line-height: 1.4;
+}
+.book-side .reassure-card .value a {
+  color: var(--orange);
+  font-weight: 600;
+}
+
+/* Right column: the form */
+.book-form {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 40px;
+  box-shadow:
+    0 1px 2px rgba(36, 22, 7, 0.04),
+    0 12px 40px rgba(36, 22, 7, 0.08);
+  border: 1px solid rgba(36, 22, 7, 0.04);
+}
+.book-form h2 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 26px;
+  letter-spacing: -0.4px;
+  color: var(--gray-900);
+  margin-bottom: 8px;
+}
+.book-form .form-note {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--gray-600);
+  margin-bottom: 28px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.field {
+  display: flex; flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+label {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--gray-600);
+}
+label .req {
+  color: var(--orange);
+}
+input, select, textarea {
+  font-family: var(--font-body);
+  font-size: 16px;
+  padding: 12px 14px;
+  border: 1px solid rgba(36, 22, 7, 0.12);
+  border-radius: 8px;
+  background: var(--white);
+  color: var(--gray-900);
+  transition: border-color .15s ease, box-shadow .15s ease;
+  -webkit-appearance: none;
+}
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: var(--orange);
+  box-shadow: 0 0 0 3px rgba(253, 109, 6, 0.12);
+}
+textarea { min-height: 90px; resize: vertical; }
+
+/* Location selector — segmented control */
+.location-toggle {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  padding: 4px;
+  background: var(--gray-100);
+  border-radius: 10px;
+  margin-bottom: 16px;
+}
+.location-toggle label {
+  display: flex; align-items: center; justify-content: center;
+  padding: 12px 16px;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 15px;
+  color: var(--gray-600);
+  cursor: pointer;
+  border-radius: 7px;
+  transition: background .15s ease, color .15s ease;
+  text-align: center;
+}
+.location-toggle input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+.location-toggle label:has(input[type="radio"]:checked) {
+  background: var(--white);
+  color: var(--gray-900);
+  box-shadow: 0 1px 3px rgba(36, 22, 7, 0.1);
+}
+.location-toggle label .addr {
+  display: block;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--gray-600);
+  margin-top: 2px;
+}
+
+.checkbox-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.checkbox-grid label {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 12px;
+  background: var(--gray-100);
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--gray-900);
+  cursor: pointer;
+  transition: background .15s ease;
+}
+.checkbox-grid label:hover { background: #ebebeb; }
+.checkbox-grid input[type="checkbox"] {
+  width: 16px; height: 16px;
+  accent-color: var(--orange);
+  margin: 0;
+}
+
+.btn-submit {
+  width: 100%;
+  background: var(--orange);
+  color: var(--white);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 17px;
+  padding: 16px;
+  border-radius: 8px;
+  margin-top: 8px;
+  transition: background-color .15s ease, transform .1s ease;
+}
+.btn-submit:hover { background: #E45F00; }
+.btn-submit:active { transform: scale(0.99); }
+.reassurance-line {
+  text-align: center;
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--gray-600);
+  margin-top: 16px;
+}
+
+@media (max-width: 900px) {
+  .booking-section .inner { grid-template-columns: 1fr; gap: 40px; }
+  .book-form { padding: 28px; }
+  .form-row { grid-template-columns: 1fr; }
+  .location-toggle { grid-template-columns: 1fr; }
+  .checkbox-grid { grid-template-columns: 1fr; }
+}
+
+/* ==== FOOTER (compact) ==== */
+.site-footer {
+  background: #000;
+  color: var(--white);
+  padding: 60px 0 40px;
+  margin-top: 60px;
+}
+.site-footer .inner {
+  max-width: var(--frame);
+  margin: 0 auto;
+  padding: 0 var(--pad-x);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+.site-footer .logo::before {
+  filter: brightness(0) invert(1);
+}
+.site-footer .back-link {
+  font-family: var(--font-body);
+  color: rgba(255,255,255,0.85);
+  border-bottom: 1px solid rgba(255,255,255,0.3);
+  padding-bottom: 2px;
+}
+.site-footer .back-link:hover { color: var(--orange-light); }
+</style>
+</head>
+<body>
+
+<!-- Utility bar -->
+<div class="utility-bar">
+  <div class="container">
+    <div class="info-group">
+      <svg viewBox="0 0 24 24"><path d="M12 2C8 2 5 5 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-4-3-7-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
+      <span>Two locations · Sherman Oaks &amp; Norwalk, CA</span>
+    </div>
+    <div class="info-group">
+      <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm.5 5h-1v6l5 3 .5-.87L12.5 12.5V7z"/></svg>
+      <span>Open 6 days a week</span>
+    </div>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="site-header">
+  <div class="inner">
+    <a class="logo" href="index.html" aria-label="Paddison Dental Group"></a>
+    <nav class="main-nav" aria-label="Primary">
+      <ul>
+        <li><a href="index.html#about">About us</a></li>
+        <li><a href="index.html#services">Services</a></li>
+        <li><a href="index.html#doctors">Dentists</a></li>
+        <li><a href="patient-forms.html">Patient Forms</a></li>
+      </ul>
+    </nav>
+    <div class="header-right">
+      <!-- Desktop: both phone numbers shown -->
+      <div class="phone-group" aria-label="Call us">
+        <a href="tel:8189904121" class="phone-link phone-link--multi">
+          <span class="loc-label">Sherman Oaks</span>
+          <span class="num">(818) 990-4121</span>
+        </a>
+        <a href="tel:5629290880" class="phone-link phone-link--multi">
+          <span class="loc-label">Norwalk</span>
+          <span class="num">(562) 929-0880</span>
+        </a>
+      </div>
+      <!-- Mobile only: phone trigger button -->
+      <button type="button" class="phone-mobile-trigger" aria-label="Call one of our locations" aria-haspopup="true" aria-expanded="false">
+        <svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C9.9 21 3 14.1 3 5.5c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .7-.2 1l-2.3 2.7z"/></svg>
+      </button>
+    </div>
+  </div>
+  <!-- Phone picker (mobile only) -->
+  <div class="phone-picker" role="menu" aria-hidden="true">
+    <a href="tel:8189904121" role="menuitem" class="phone-picker__item">
+      <span class="loc-label">Sherman Oaks</span>
+      <span class="num">(818) 990-4121</span>
+    </a>
+    <a href="tel:5629290880" role="menuitem" class="phone-picker__item">
+      <span class="loc-label">Norwalk</span>
+      <span class="num">(562) 929-0880</span>
+    </a>
+  </div>
+</header>
+
+<!-- Page hero -->
+<section class="page-hero">
+  <div class="inner">
+    <div class="eyebrow">Free Consultation · No Commitment</div>
+    <h1>Let's start with <span class="accent">a conversation,</span> not a procedure.</h1>
+    <p>Tell us a bit about what brings you in. We'll call you back within one business day to find a time that works — and answer any questions before your visit.</p>
+  </div>
+</section>
+
+<!-- Booking layout -->
+<section class="booking-section">
+  <div class="inner">
+    <!-- Left: What to expect -->
+    <div class="book-side">
+      <h3>What to expect</h3>
+      <ol>
+        <li>
+          <strong>Submit this form</strong>
+          <span>Takes about 60 seconds. No payment info, no insurance details — just the basics.</span>
+        </li>
+        <li>
+          <strong>We call you back</strong>
+          <span>Within one business day. We'll answer questions and find a time that actually works for your schedule.</span>
+        </li>
+        <li>
+          <strong>Come in for your free visit</strong>
+          <span>Meet your doctor, get a clear picture of where you stand, and leave with honest options. No pressure to do anything that day.</span>
+        </li>
+      </ol>
+
+      <div class="reassure-card">
+        <div class="label">Prefer to call?</div>
+        <div class="value" style="font-size: 16px; line-height: 1.6;">
+          <div style="margin-bottom: 6px;">
+            <span style="color: var(--gray-600); font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; display: block;">Sherman Oaks</span>
+            <a href="tel:8189904121">(818) 990-4121</a>
+          </div>
+          <div>
+            <span style="color: var(--gray-600); font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; display: block;">Norwalk</span>
+            <a href="tel:5629290880">(562) 929-0880</a>
+          </div>
+        </div>
+      </div>
+      <div class="reassure-card">
+        <div class="label">After-hours emergency?</div>
+        <div class="value">Call your closest location. Our voicemail has instructions to reach the doctor on call.</div>
+      </div>
+    </div>
+
+    <!-- Right: The form -->
+    <form class="book-form" onsubmit="event.preventDefault(); document.getElementById('book-thanks').scrollIntoView({behavior:'smooth'}); this.style.display='none'; document.getElementById('book-thanks').style.display='block';">
+      <h2>Book your free consultation</h2>
+      <p class="form-note">Fields marked <span style="color: var(--orange);">*</span> are required. Your info stays private.</p>
+
+      <!-- Location -->
+      <div class="field">
+        <label>Which location? <span class="req">*</span></label>
+        <div class="location-toggle">
+          <label>
+            <input type="radio" name="location" value="sherman-oaks" required checked>
+            <span>Sherman Oaks<span class="addr">4955 Van Nuys Blvd</span></span>
+          </label>
+          <label>
+            <input type="radio" name="location" value="norwalk" required>
+            <span>Norwalk<span class="addr">12501 S. Norwalk Blvd</span></span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Name -->
+      <div class="form-row">
+        <div class="field">
+          <label for="first">First name <span class="req">*</span></label>
+          <input id="first" name="first" type="text" required>
+        </div>
+        <div class="field">
+          <label for="last">Last name <span class="req">*</span></label>
+          <input id="last" name="last" type="text" required>
+        </div>
+      </div>
+
+      <!-- Contact -->
+      <div class="form-row">
+        <div class="field">
+          <label for="phone">Phone <span class="req">*</span></label>
+          <input id="phone" name="phone" type="tel" required placeholder="(818) 555-0123">
+        </div>
+        <div class="field">
+          <label for="email">Email <span class="req">*</span></label>
+          <input id="email" name="email" type="email" required placeholder="you@example.com">
+        </div>
+      </div>
+
+      <!-- New or existing -->
+      <div class="field">
+        <label for="patient-type">Are you a new patient? <span class="req">*</span></label>
+        <select id="patient-type" name="patient-type" required>
+          <option value="">Choose one</option>
+          <option value="new">Yes, I'm a new patient</option>
+          <option value="returning">No, I've been here before</option>
+        </select>
+      </div>
+
+      <!-- Reason for visit -->
+      <div class="field">
+        <label>What brings you in? (Check any that apply)</label>
+        <div class="checkbox-grid">
+          <label><input type="checkbox" name="reason" value="cleaning"> Cleaning &amp; checkup</label>
+          <label><input type="checkbox" name="reason" value="implant"> Dental implants</label>
+          <label><input type="checkbox" name="reason" value="cosmetic"> Cosmetic / whitening</label>
+          <label><input type="checkbox" name="reason" value="ortho"> Braces / Invisalign</label>
+          <label><input type="checkbox" name="reason" value="kids"> Care for my child</label>
+          <label><input type="checkbox" name="reason" value="emergency"> Something's hurting</label>
+          <label><input type="checkbox" name="reason" value="second"> Second opinion</label>
+          <label><input type="checkbox" name="reason" value="other"> Something else</label>
+        </div>
+      </div>
+
+      <!-- Preferred time -->
+      <div class="field">
+        <label for="preferred">When works for you? (We'll do our best)</label>
+        <select id="preferred" name="preferred">
+          <option value="">No preference — call me anytime</option>
+          <option>Weekday mornings</option>
+          <option>Weekday afternoons</option>
+          <option>Weekday evenings</option>
+          <option>Specific date in mind — I'll mention it in notes</option>
+        </select>
+      </div>
+
+      <!-- Notes -->
+      <div class="field">
+        <label for="notes">Anything we should know? (optional)</label>
+        <textarea id="notes" name="notes" placeholder="Dental anxiety, past bad experiences, specific timing — anything that'll help us prepare for your visit."></textarea>
+      </div>
+
+      <button type="submit" class="btn-submit">Send My Request</button>
+      <p class="reassurance-line">No spam. We'll only contact you about your appointment.</p>
+    </form>
+
+    <!-- Thank-you state (hidden until form submits) -->
+    <div id="book-thanks" style="display:none; grid-column: 1 / -1; text-align: center; padding: 60px 40px; background: var(--gray-100); border-radius: 16px;">
+      <div style="font-size: 48px; margin-bottom: 16px;">✓</div>
+      <h2 style="font-family: var(--font-display); font-weight: 600; font-size: 32px; color: var(--gray-900); margin-bottom: 12px;">We've got it.</h2>
+      <p style="font-family: var(--font-body); font-size: 18px; color: var(--gray-600); max-width: 480px; margin: 0 auto;">We'll call you back within one business day. In the meantime, you can <a href="tel:8189904121" style="color: var(--orange); font-weight: 600;">call us</a> or <a href="index.html" style="color: var(--orange); font-weight: 600;">head back to the main page</a>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <div class="inner">
+    <a class="logo" href="index.html"></a>
+    <a class="back-link" href="index.html">← Back to the main page</a>
+  </div>
+</footer>
+
+<script>
+  // Mobile phone picker — tap to open dropdown
+  (function() {
+    const trigger = document.querySelector('.phone-mobile-trigger');
+    const picker = document.querySelector('.phone-picker');
+    if (!trigger || !picker) return;
+
+    function open() {
+      picker.classList.add('is-open');
+      picker.setAttribute('aria-hidden', 'false');
+      trigger.setAttribute('aria-expanded', 'true');
+    }
+    function close() {
+      picker.classList.remove('is-open');
+      picker.setAttribute('aria-hidden', 'true');
+      trigger.setAttribute('aria-expanded', 'false');
+    }
+
+    trigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = picker.classList.contains('is-open');
+      if (isOpen) close(); else open();
+    });
+    document.addEventListener('click', (e) => {
+      if (!picker.contains(e.target) && !trigger.contains(e.target)) close();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') close();
+    });
+    picker.querySelectorAll('.phone-picker__item').forEach(item => {
+      item.addEventListener('click', () => close());
+    });
+  })();
+</script>
+
+</body>
+</html>
